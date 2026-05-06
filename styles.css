@@ -570,6 +570,171 @@ h2 {
 }
 
 /* =========================================================
+   MAKER KLUBBEN
+   ========================================================= */
+.klubben {
+  position: relative;
+  padding: 120px 48px;
+  background: var(--paper);
+  overflow: hidden;
+}
+.kl-bg { position: absolute; inset: 0; pointer-events: none; }
+.kl-orb { position: absolute; border-radius: 50%; filter: blur(2px); opacity: 0.55; }
+.kl-orb-a {
+  width: 520px; height: 520px;
+  background: var(--coral);
+  top: -180px; right: -160px;
+  opacity: 0.18;
+}
+.kl-orb-b {
+  width: 380px; height: 380px;
+  background: var(--green);
+  bottom: -120px; left: -100px;
+  opacity: 0.22;
+}
+.kl-inner {
+  position: relative; z-index: 1;
+  max-width: var(--maxw); margin: 0 auto;
+}
+.kl-head { max-width: 760px; margin-bottom: 48px; }
+.kl-head h2 em {
+  font-style: italic;
+  background: linear-gradient(transparent 60%, rgba(255,97,97,0.35) 60%);
+  padding: 0 4px;
+}
+.kl-lede {
+  margin-top: 20px;
+  font-size: 18px; color: var(--ink-2);
+  max-width: 560px;
+}
+.kl-tabs {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin-bottom: 28px;
+}
+.kl-tab {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  padding: 22px 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  transition: all .25s ease;
+}
+.kl-tab:hover { transform: translateY(-2px); border-color: var(--ink); }
+.kl-tab.is-on {
+  background: var(--ink); color: var(--paper);
+  border-color: var(--ink);
+}
+.kl-tab-n {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 1.4px;
+  color: var(--muted);
+}
+.kl-tab.is-on .kl-tab-n { color: var(--coral); }
+.kl-tab-l {
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 500;
+}
+.kl-tab-s {
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: 0.4px; color: var(--muted);
+}
+.kl-tab.is-on .kl-tab-s { color: rgba(255,255,255,0.6); }
+
+.kl-panel {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 40px;
+  animation: klFade .35s ease;
+}
+@keyframes klFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.kl-panel-main h3 {
+  font-family: var(--font-display);
+  font-size: 36px; font-weight: 500;
+  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+}
+.kl-panel-main p {
+  margin: 0 0 24px;
+  font-size: 16.5px; color: var(--ink-2);
+  max-width: 560px;
+}
+.kl-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.kl-list li {
+  display: flex; gap: 14px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-radius: 14px;
+  font-size: 15px;
+}
+.kl-bullet {
+  font-family: var(--font-mono);
+  color: var(--green);
+  font-weight: 600;
+}
+.kl-benefits {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.kl-benefit {
+  display: flex; gap: 14px;
+  padding: 16px;
+  background: var(--paper);
+  border-radius: 16px;
+}
+.kl-benefit-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--ink); color: var(--paper);
+  display: grid; place-items: center; flex-shrink: 0;
+  font-family: var(--font-mono); font-size: 14px;
+}
+.kl-benefit-t { font-weight: 600; font-size: 14.5px; }
+.kl-benefit-d { color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+.kl-meta {
+  background: var(--paper);
+  border-radius: 20px;
+  padding: 28px;
+  display: flex; flex-direction: column;
+  align-self: flex-start;
+}
+.kl-meta-row {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.kl-meta-row:last-of-type { border-bottom: none; }
+.kl-meta-row span {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--muted);
+}
+.kl-meta-row b { font-weight: 600; text-align: right; }
+.kl-btn { margin-top: 16px; justify-content: center; }
+.kl-meta-note {
+  margin-top: 12px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.4px;
+  color: var(--muted);
+}
+
+@media (max-width: 880px) {
+  .klubben { padding: 80px 24px; }
+  .kl-tabs { grid-template-columns: 1fr; }
+  .kl-panel { grid-template-columns: 1fr; padding: 28px; }
+  .kl-benefits { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
    PARTNERS
    ========================================================= */
 .partners {
