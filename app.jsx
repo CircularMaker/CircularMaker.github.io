@@ -5,12 +5,23 @@ const { useState, useEffect, useRef, useMemo } = React;
    DATA — drawn from the original poster
    ============================================================ */
 const WORKSHOPS = [
-{ id: "w1", date: "29 MAI", time: "17:00", title: "Åpningsfest", host: "Hele teamet", spots: 80, taken: 53, tag: "Event", img: "p4" },
-{ id: "w2", date: "04 JUN", time: "18:00", title: "Synål & sytråd — reparasjon for nybegynnere", host: "Inga", spots: 12, taken: 9, tag: "Kurs", img: "p5" },
-{ id: "w3", date: "08 JUN", time: "10:00", title: "Broderitreff — kom som du er", host: "Liv", spots: 15, taken: 6, tag: "Drop-in", img: "p6" },
-{ id: "w4", date: "11 JUN", time: "17:30", title: "Heklet topp av rester", host: "Aïsha", spots: 10, taken: 10, tag: "Kurs", img: "p3" },
-{ id: "w5", date: "15 JUN", time: "12:00", title: "Reparasjonscafé — gratis", host: "Drop-in", spots: 30, taken: 12, tag: "Gratis", img: "p1" },
-{ id: "w6", date: "22 JUN", time: "18:00", title: "Redesign jeans → veske", host: "Mira", spots: 8, taken: 5, tag: "Kurs", img: "p2" }];
+{ id: "w1", date: "01 JUN", weekday: "Mandag", time: "16:00 — 20:00", title: "Reparasjonstreff", host: "Eline Medbøe", price: "Gratis", note: "Drop-in", tag: "Gratis", img: "images/ws-jeans.jpg" },
+{ id: "w2", date: "02 JUN", weekday: "Tirsdag", time: "17:00 — 20:00", title: "Lær deg å hekle", host: "Janne Rønningen", price: "940,–", tag: "Kurs", link: "https://relove.hoopla.no/event/742423736", img: "images/ws-hekling.jpg" },
+{ id: "w3", date: "03 JUN", weekday: "Onsdag", time: "17:00 — 19:00", title: "Bli kjent med symaskinen", host: "Eline Medbøe", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1909530176", img: "images/ws-symaskin.jpg" },
+{ id: "w4", date: "04 JUN", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/ws-symaskin.jpg" },
+{ id: "w5", date: "06 JUN", weekday: "Lørdag", time: "11:00 — 15:00", title: "Familieverksted — sy veske eller squishmallow", host: "Drop-in for familier", price: "Gratis", tag: "Gratis", img: "images/ws-tote2.jpg" },
+{ id: "w6", date: "09 JUN", weekday: "Tirsdag", time: "17:00 — 20:00", title: "Lær deg å strikke", host: "Janne Rønningen", price: "940,–", tag: "Kurs", link: "https://relove.hoopla.no/event/869353005", img: "images/ws-strikking.jpg" },
+{ id: "w7", date: "10 JUN", weekday: "Onsdag", time: "17:00 — 19:00", title: "Jeans-reparasjon", host: "Katya Bukhantsova", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/209200522", img: "images/ws-jeans.jpg" },
+{ id: "w8", date: "11 JUN", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/ws-symaskin.jpg" },
+{ id: "w9", date: "16 JUN", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Tekstilillustrasjon og håndsøm", host: "Anna Liubchencko", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1688824349", img: "images/ws-tekstil.jpg" },
+{ id: "w10", date: "17 JUN", weekday: "Onsdag", time: "17:00 — 19:00", title: "Trykk på tetrapack", host: "Tone Eikholt", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1954679204", img: "images/ws-trykk.jpg" },
+{ id: "w11", date: "18 JUN", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/ws-symaskin.jpg" },
+{ id: "w12", date: "20 JUN", weekday: "Lørdag", time: "11:00 — 15:00", title: "Familieverksted — sy veske eller squishmallow", host: "Drop-in for familier", price: "Gratis", tag: "Gratis", img: "images/ws-tote2.jpg" },
+{ id: "w13", date: "23 JUN", weekday: "Tirsdag", time: "17:00 — 20:00", title: "Sy egen bøttehatt", host: "Katja Nielsen", price: "940,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1641624015", img: "images/ws-botthat.jpg" },
+{ id: "w14", date: "24 JUN", weekday: "Onsdag", time: "17:00 — 19:00", title: "Franske sømmer & tote-bag", host: "Katja Nielsen", price: "Kursavgift", tag: "Kurs", link: "https://relove.hoopla.no/event/1887898570", img: "images/ws-tote.jpg" },
+{ id: "w15", date: "25 JUN", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/ws-symaskin.jpg" },
+{ id: "w16", date: "26 JUN", weekday: "Fredag", time: "17:00", title: "Lansering: «Not a virgin»", host: "Broderte vesker av Eline Medbøe", price: "Åpent for alle", tag: "Event", img: null },
+{ id: "w17", date: "30 JUN", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Lær deg håndsøm", host: "Katya Bukhantsova", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1075605322", img: "images/ws-handsom.jpg" }];
 
 
 const SERVICES = [
@@ -198,11 +209,10 @@ function NavStrip() {
       <nav className="nav-links">
         <a href="#schedule">Kurs &amp; events</a>
         <a href="#services">Tjenester</a>
-        <a href="#klubben">Maker Klubben</a>
+        <a href="#klubben">Maker Club</a>
         <a href="#partners">Partnere</a>
         <a href="#visit">Besøk</a>
       </nav>
-      <a href="#schedule" className="nav-cta">Påmelding</a>
     </div>);
 
 }
@@ -273,7 +283,6 @@ function StatsBar() {
 function Schedule() {
   const [filter, setFilter] = useState("Alle");
   const [hover, setHover] = useState(null);
-  const [signed, setSigned] = useState({});
   const tags = ["Alle", "Kurs", "Drop-in", "Gratis", "Event"];
   const list = filter === "Alle" ? WORKSHOPS : WORKSHOPS.filter((w) => w.tag === filter);
 
@@ -282,7 +291,7 @@ function Schedule() {
       <header className="section-head">
         <div>
           <div className="eyebrow"><Dot /> Kurs &amp; events</div>
-          <h2>Hva skjer</h2>
+          <h2>Hva skjer i juni</h2>
         </div>
         <div className="filter-pills">
           {tags.map((t) =>
@@ -294,21 +303,19 @@ function Schedule() {
       </header>
 
       <ul className="ws-list">
-        {list.map((w, i) => {
-          const full = w.taken >= w.spots;
-          const pct = Math.min(100, Math.round(w.taken / w.spots * 100));
+        {list.map((w) => {
           const isHover = hover === w.id;
-          const isSigned = signed[w.id];
           return (
             <li
               key={w.id}
               className={"ws-row " + (isHover ? "is-hover" : "")}
               onMouseEnter={() => setHover(w.id)}
               onMouseLeave={() => setHover(null)}>
-              
+
               <div className="ws-date">
                 <div className="ws-date-day">{w.date.split(" ")[0]}</div>
                 <div className="ws-date-mo">{w.date.split(" ")[1]}</div>
+                {w.weekday && <div className="ws-date-wd">{w.weekday}</div>}
               </div>
               <div className="ws-time">{w.time}</div>
               <div className="ws-title">
@@ -317,20 +324,26 @@ function Schedule() {
                 <div className="ws-host">m/ {w.host}</div>
               </div>
               <div className="ws-spots">
-                <div className="ws-spots-line">
-                  <span className="ws-spots-n">{w.taken}/{w.spots}</span>
-                  <span className="ws-spots-l">{full ? "fullt — venteliste" : "påmeldt"}</span>
-                </div>
-                <div className="ws-bar"><div className="ws-bar-fill" style={{ width: pct + "%" }} /></div>
+                <div className="ws-price">{w.price}</div>
+                {w.note && <div className="ws-price-note">{w.note}</div>}
               </div>
-              <button
-                className={"ws-cta " + (isSigned ? "is-signed" : "") + (full ? " is-full" : "")}
-                onClick={() => setSigned((s) => ({ ...s, [w.id]: !s[w.id] }))}>
-                
-                {isSigned ? "✓ Påmeldt" : full ? "Venteliste" : "Meld på"}
-              </button>
+              {w.link ?
+                <a
+                  className="ws-cta"
+                  href={w.link}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Påmelding ↗
+                </a> :
+                <span className="ws-cta is-dropin">
+                  {w.tag === "Event" ? "Åpent — møt opp" : "Bare møt opp"}
+                </span>
+              }
               <div className="ws-hover-img" aria-hidden>
-                <img src={`images/${w.img}.${w.img === "p1" ? "jpg" : "png"}`} alt="" />
+                {w.img ?
+                  <img src={w.img} alt="" /> :
+                  <div className="ws-hover-empty" style={{ background: w.tag === "Event" ? "var(--coral)" : "var(--paper-2)" }} />
+                }
               </div>
             </li>);
 
@@ -470,7 +483,7 @@ function Klubben() {
 
       <div className="kl-inner">
         <div className="kl-head">
-          <div className="eyebrow"><Dot color="var(--coral)" /> Circular Maker Club</div>
+          <div className="eyebrow"><Dot color="var(--coral)" /> Maker Club</div>
           <h2>Skap, reparer<br/>og jobb med egne<br/><em>prosjekter.</em></h2>
           <p className="kl-lede">
             Et åpent verksted og et kreativt fellesskap. Lån utstyr, få veiledning,
@@ -519,7 +532,7 @@ function Klubben() {
         {tab === "club" && (
           <div className="kl-panel">
             <div className="kl-panel-main">
-              <h3>Bli medlem i Maker Klubben</h3>
+              <h3>Bli medlem i Maker Club</h3>
               <p>
                 For deg som vil bruke verkstedet jevnlig og utvikle ferdighetene dine
                 over tid. Medlemskap gir både fri tilgang og rabatter — pluss invitasjoner
@@ -542,7 +555,7 @@ function Klubben() {
               <div className="kl-meta-row"><span>Binding</span><b>Ingen — si opp når som helst</b></div>
               <div className="kl-meta-row"><span>For hvem</span><b>Faste brukere av verkstedet</b></div>
               <div className="kl-meta-row"><span>Innmelding</span><b>Via e-post</b></div>
-              <a href="mailto:hei@circularmaker.no?subject=Maker%20Klubben" className="btn btn-primary kl-btn">Ta kontakt →</a>
+              <a href="mailto:kontakt@relove.info?subject=Maker%20Club" className="btn btn-primary kl-btn">Ta kontakt →</a>
               <div className="kl-meta-note">Fornyes månedlig. Rabattkode for kurs sendes sammen med faktura.</div>
             </aside>
           </div>
@@ -565,14 +578,18 @@ function Partners() {
           Circular Maker Studio er et samarbeid mellom <a href="https://www.relove.info/" target="_blank" rel="noopener">Relove</a> og <a href="https://www.relab.no/" target="_blank" rel="noopener">Re//Lab</a> — to organisasjoner som jobber med å forlenge livet til klærne dine.
         </p>
         <div className="partner-logos">
-          <div className="logo-card">
-            <div className="logo-name">RELOVE</div>
-            <div className="logo-tag">SOSIAL ENTERPRENØR</div>
-          </div>
-          <div className="logo-card">
-            <div className="logo-name" style={{ fontFamily: "monospace", letterSpacing: 2 }}>RE//LAB</div>
+          <a className="logo-card logo-card-light" href="https://www.relove.info/" target="_blank" rel="noopener noreferrer">
+            <div className="logo-img">
+              <img src="images/logo-relove.png" alt="Relove" />
+            </div>
+            <div className="logo-tag">Sosial entreprenør</div>
+          </a>
+          <a className="logo-card logo-card-dark" href="https://www.relab.no/" target="_blank" rel="noopener noreferrer">
+            <div className="logo-img logo-img-relab">
+              <img src="images/logo-relab.png" alt="Re//Lab" />
+            </div>
             <div className="logo-tag">Tekstil-laboratorium</div>
-          </div>
+          </a>
         </div>
       </div>
     </section>);
@@ -588,38 +605,36 @@ function Visit() {
           <h2>Maridalsveien 154</h2>
           <p>0461 Oslo </p>
           <dl className="hours">
-            <div><dt>Man–Fre</dt><dd>10:00 — 16:00</dd></div>
-            <div><dt>Lørdag</dt><dd>12:00 — 15:00</dd></div>
-            <div><dt>Søndag</dt><dd>Stengt</dd></div>
+            <div><dt>Tirsdag</dt><dd>10:00 — 16:00</dd></div>
+            <div><dt>Onsdag</dt><dd>10:00 — 16:00</dd></div>
+            <div><dt>Torsdag</dt><dd>10:00 — 20:00</dd></div>
+            <div><dt>Lørdag</dt><dd>12:00 — 16:00</dd></div>
+            <div><dt>Andre dager</dt><dd>Stengt</dd></div>
           </dl>
           <div className="contact">
-            <span>hei@circularmaker.no</span>
-            <span>+47 22 00 00 00</span>
+            <a href="mailto:kontakt@relove.info">kontakt@relove.info</a>
+            <a href="tel:+4798442960">+47 984 42 960</a>
           </div>
         </div>
         <div className="visit-right">
-          <div className="map-mock">
-            <svg viewBox="0 0 600 500" width="100%" height="100%">
-              <rect width="600" height="500" fill="#e9e6dd" />
-              {/* roads */}
-              <path d="M0 320 L600 280" stroke="#d4cfc1" strokeWidth="36" fill="none" />
-              <path d="M180 0 L260 500" stroke="#d4cfc1" strokeWidth="28" fill="none" />
-              <path d="M0 120 L600 100" stroke="#d4cfc1" strokeWidth="18" fill="none" />
-              <path d="M450 0 L500 500" stroke="#d4cfc1" strokeWidth="14" fill="none" />
-              {/* river */}
-              <path d="M0 460 Q200 420 320 460 T 600 440" stroke="#bcd5cc" strokeWidth="22" fill="none" />
-              {/* parks */}
-              <circle cx="100" cy="200" r="60" fill="#cde0c5" />
-              <rect x="380" y="180" width="120" height="80" fill="#cde0c5" />
-              {/* pin */}
-              <g transform="translate(232 305)">
-                <circle r="44" fill="var(--green)" opacity="0.25" className="pin-pulse" />
-                <circle r="22" fill="var(--green)" />
-                <circle r="8" fill="#fff" />
-              </g>
-              <text x="270" y="312" fontFamily="ui-monospace, monospace" fontSize="13" fill="#2f2f2f">Maridalsv. 154</text>
-            </svg>
-          </div>
+          <a
+            className="map-mock"
+            href="https://www.google.com/maps/search/?api=1&query=Maridalsveien+154+Oslo"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Åpne i Google Maps">
+            <iframe
+              title="Kart over Maridalsveien 154, Oslo"
+              src="https://www.google.com/maps?q=Maridalsveien+154,+Oslo&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <span className="map-badge">
+              <span className="map-pin" />
+              Åpne i Google Maps ↗
+            </span>
+          </a>
         </div>
       </div>
     </section>);
@@ -645,11 +660,6 @@ function Footer() {
             <h4>Partnere</h4>
             <a href="https://www.relove.info/" target="_blank" rel="noopener">Relove</a>
             <a href="https://www.relab.no/" target="_blank" rel="noopener">Re//Lab</a>
-          </div>
-          <div>
-            <h4>Følg</h4>
-            <a href="#">Instagram</a>
-            <a href="#">Nyhetsbrev</a>
           </div>
         </div>
       </div>
@@ -694,7 +704,6 @@ function App() {
     <>
       <Hero tweaks={t} />
       <Marquee />
-      <StatsBar />
       <Schedule />
       <Services />
       <Klubben />
