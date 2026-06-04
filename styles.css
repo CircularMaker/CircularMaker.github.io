@@ -545,32 +545,47 @@ h2 {
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.4px;
   color: var(--green-deep); white-space: nowrap;
 }
-.svc-body p {
-  margin: 12px 0 0;
-  color: var(--ink-2); font-size: 14.5px; line-height: 1.55;
-  max-height: 0; overflow: hidden;
-  transition: max-height .4s ease, margin .4s ease;
-}
-.svc-card:hover .svc-body p,
-.svc-card.is-open .svc-body p {
-  max-height: 200px;
-  margin-top: 12px;
-}
-.svc-foot {
-  display: flex; justify-content: space-between; align-items: center;
+.svc-more {
   margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase;
 }
-.svc-cta { color: var(--ink); }
-.svc-arrow {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--paper); display: grid; place-items: center;
-  transition: background .25s ease, color .25s ease, transform .25s ease;
+.svc-more-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: transparent; color: var(--ink);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  font-weight: 500;
+  transition: background .2s ease, color .2s ease;
 }
-.svc-card:hover .svc-arrow {
-  background: var(--green); color: #fff; transform: rotate(45deg);
+.svc-more-icon {
+  display: grid; place-items: center;
+  width: 16px; height: 16px;
+  font-size: 14px; line-height: 1;
+  transition: transform .3s ease;
+}
+.svc-more:hover .svc-more-btn,
+.svc-card.is-open .svc-more-btn {
+  background: var(--green); border-color: var(--green); color: #fff;
+}
+.svc-more:hover .svc-more-icon,
+.svc-card.is-open .svc-more-icon {
+  transform: rotate(45deg);
+}
+.svc-more-text {
+  max-height: 0; overflow: hidden;
+  transition: max-height .4s ease, margin .4s ease, opacity .3s ease;
+  opacity: 0;
+}
+.svc-more-text p {
+  margin: 0;
+  color: var(--ink-2); font-size: 14.5px; line-height: 1.55;
+}
+.svc-more:hover .svc-more-text,
+.svc-card.is-open .svc-more-text {
+  max-height: 220px;
+  margin-top: 16px;
+  opacity: 1;
 }
 
 @media (max-width: 980px) {

@@ -25,12 +25,12 @@ const WORKSHOPS = [
 
 
 const SERVICES = [
-{ id: "s1", title: "Reparasjon", desc: "Knapper, hull, ødelagte glidelåser, sliter, slitne sømmer. Ta med i butikken — vi gir pris på flekken.", price: "fra 80 kr", img: "p5", color: "#0da959" },
-{ id: "s2", title: "Omsøm", desc: "Ta inn, slipp ut, korte ned. Klassisk skredderarbeid på dine egne plagg.", price: "fra 250 kr", img: "p2", color: "#0da959" },
-{ id: "s3", title: "Broderi", desc: "Mono­grammer, logoer, motiv. Vi har en Melco 16-nålers maskin og digitaliserer ditt motiv.", price: "fra 150 kr", img: "p6", color: "#0da959" },
-{ id: "s4", title: "Redesign", desc: "Snakk med oss om plagget du elsker men ikke bruker. Vi tegner det om til noe du faktisk vil ha på.", price: "individuelt", img: "p3", color: "#0da959" },
-{ id: "s5", title: "2.hand", desc: "Kuratert utvalg av brukte plagg, materialer og rester — alt klart til nytt liv.", price: "varierer", img: "p4", color: "#0da959" },
-{ id: "s6", title: "Materialbank", desc: "Stoff­rester, knapper, glidelåser, garn — gjenbruks­materialer du kan kjøpe på vekt.", price: "fra 40 kr/kg", img: "p1", color: "#0da959" }];
+{ id: "s1", title: "Reparasjon", desc: "Knapper, hull, ødelagte glidelåser, sliter, slitne sømmer. Ta med i butikken — vi gir pris på flekken.", more: "Knapper, hull, ødelagte glidelåser, slitne sømmer. Ta med - vi gir deg en pris på.", price: "", img: "p5.jpg", color: "#0da959" },
+{ id: "s2", title: "Omsøm", desc: "Ta inn, slipp ut, korte ned. Klassisk skredderarbeid på dine egne plagg.", more: "Ta inn, legg opp eller ned. Vi tar tilpassing av bunader.", price: "", img: "p2.jpg", color: "#0da959" },
+{ id: "s3", title: "Broderi", desc: "Mono­grammer, logoer, motiv. Vi har en Melco 16-nålers maskin og digitaliserer ditt motiv.", more: "Alt av broderi på plagg. Vi digitaliserer ditt motiv og broderer på en Melco 16-nålers maskin. Stikk innom eller ta kontakt på e-post.", price: "", img: "p6.jpg", color: "#0da959" },
+{ id: "s4", title: "Redesign", desc: "Snakk med oss om plagget du elsker men ikke bruker. Vi tegner det om til noe du faktisk vil ha på.", more: "Snakk med oss om plagget du elsker men ikke bruker. Vi tegner det om til noe du faktisk vil ha på.", price: "", img: "p3.jpg", color: "#0da959" },
+{ id: "s5", title: "2.hand", desc: "Kuratert utvalg av brukte plagg, materialer og rester — alt klart til nytt liv.", more: "Kuratert utvalg av brukte plagg, materialer og rester — alt klart til nytt liv.", price: "", img: "2hand.jpg", color: "#0da959" },
+{ id: "s6", title: "Circular Maker", desc: "Stoff­rester, knapper, glidelåser, garn — gjenbruks­materialer du kan kjøpe på vekt.", more: "DIY-kits, materialepakker og hobbyartikler av gjenbruksmaterialer. Kom innom og se utvalget.", price: "", img: "p1", color: "#0da959" }];
 
 
 const PICKER_OPTIONS = [
@@ -174,23 +174,6 @@ function Hero({ tweaks }) {
               <span key={t} className={"tag-word " + (i === tagline ? "is-active" : "")}>{t}</span>
               )}
             </span>
-          </div>
-
-          <div className="countdown" aria-label="Nedtelling til åpning">
-            <div className="countdown-label">Åpning 29. mai • 17:00</div>
-            <div className="countdown-grid">
-              {[
-              ["dager", days],
-              ["timer", hours],
-              ["min", mins],
-              ["sek", secs]].
-              map(([l, v]) =>
-              <div className="cd-cell" key={l}>
-                  <div className="cd-num">{String(v).padStart(2, "0")}</div>
-                  <div className="cd-label">{l}</div>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </div>
@@ -441,17 +424,21 @@ function Services() {
           style={{ "--i": i }}>
           
             <div className="svc-img">
-              <img src={`images/${s.img}.${s.img === "p1" ? "jpg" : "png"}`} alt="" />
+              <img src={s.img.includes(".") ? `images/${s.img}` : `images/${s.img}.${s.img === "p1" ? "jpg" : "png"}`} alt="" />
             </div>
             <div className="svc-body">
               <div className="svc-head">
                 <h3>{s.title}</h3>
                 <span className="svc-price">{s.price}</span>
               </div>
-              <p>{s.desc}</p>
-              <div className="svc-foot">
-                <span className="svc-cta">{open === s.id ? "Bestill nå →" : "Mer info"}</span>
-                <span className="svc-arrow">↗</span>
+              <div className="svc-more">
+                <button type="button" className="svc-more-btn" onClick={(e) => e.stopPropagation()}>
+                  <span>Mer info</span>
+                  <span className="svc-more-icon">+</span>
+                </button>
+                <div className="svc-more-text">
+                  <p>{s.more}</p>
+                </div>
               </div>
             </div>
           </article>
