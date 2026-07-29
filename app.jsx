@@ -5,30 +5,23 @@ const { useState, useEffect, useRef, useMemo } = React;
    DATA — drawn from the original poster
    ============================================================ */
 const WORKSHOPS = [
-{ id: "w1", date: "01 JUL", weekday: "Onsdag", time: "17:00 — 19:00", title: "Sy glidelås", host: "Katja Nielsen", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1409831992", img: "images/jul-glidelas.jpg" },
-{ id: "w2", date: "02 JUL", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/jul-makernight.jpg" },
-{ id: "w3", date: "03 JUL", weekday: "Fredag", time: "17:00 — 20:00", title: "Vennedating: Sip & Sew", host: "Sosial sykveld", price: "750,–", tag: "Event", link: "https://relove.hoopla.no/event/1411670425", img: "images/jul-sipsew.jpg" },
-{ id: "w4", date: "04 JUL", weekday: "Lørdag", time: "17:00 — 19:00", title: "Nålefilting", host: "Matilda Høøg", price: "950,–", tag: "Kurs", link: "https://relove.hoopla.no/event/343689238", img: "images/jul-nalefilting.jpg" },
-{ id: "w5", date: "06 JUL", weekday: "Mandag", time: "16:00 — 20:00", title: "Reparasjonstreff", host: "Katya Bukhantsova", price: "Gratis", note: "Drop-in", tag: "Gratis", img: "images/jul-reparasjon.jpg" },
-{ id: "w6", date: "07 JUL", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Broderiteknikker", host: "Katya Bukhantsova", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/2017806094", img: "images/jul-broderi.jpg" },
-{ id: "w7", date: "08 JUL", weekday: "Onsdag", time: "17:00 — 19:00", title: "Kunsthekling: ringer og buer", host: "Katya Bukhantsova", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/215383303", img: "images/jul-kunsthekling.jpg" },
-{ id: "w8", date: "09 JUL", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/jul-makernight.jpg" },
-{ id: "w9", date: "10 JUL", weekday: "Fredag", time: "17:00 — 20:00", title: "Vennedating: Sip & Sew", host: "Sosial sykveld", price: "750,–", tag: "Event", link: "https://relove.hoopla.no/event/1192711777", img: "images/jul-sipsew2.jpg" },
-{ id: "w10", date: "11 JUL", weekday: "Lørdag", time: "17:00 — 19:00", title: "Trykk på tetrapack", host: "Tone Eikholt", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/163460475", img: "images/jul-trykk.jpg" },
-{ id: "w11", date: "14 JUL", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Trykk på tetrapack", host: "Tone Eikholt", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/942084954", img: "images/jul-trykk.jpg" },
-{ id: "w12", date: "15 JUL", weekday: "Onsdag", time: "17:00 — 20:00", title: "Franske sømmer & tote-bag", host: "Katja Nielsen", price: "940,–", tag: "Kurs", link: "https://relove.hoopla.no/event/40268561", img: "images/jul-totebag.jpg" },
-{ id: "w13", date: "16 JUL", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/jul-makernight.jpg" },
-{ id: "w14", date: "17 JUL", weekday: "Fredag", time: "17:00 — 20:00", title: "Vennedating: Sip & Sew", host: "Sosial sykveld", price: "750,–", tag: "Event", link: "https://relove.hoopla.no/event/1958438173", img: "images/jul-sipsew.jpg" },
-{ id: "w15", date: "18 JUL", weekday: "Lørdag", time: "17:00 — 19:00", title: "Trykk på tetrapack", host: "Tone Eikholt", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1606698611", img: "images/jul-trykk.jpg" },
-{ id: "w16", date: "21 JUL", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Tekstilillustrasjon og håndsøm", host: "Anna Lubchencko", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1545759040", img: "images/jul-tekstil.jpg" },
-{ id: "w17", date: "22 JUL", weekday: "Onsdag", time: "17:00 — 20:00", title: "Konstruer og sy sirkelskjørt", host: "Katya Bukhantsova", price: "950,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1924548676", img: "images/jul-sirkelskjort.jpg" },
-{ id: "w18", date: "23 JUL", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/jul-makernight.jpg" },
-{ id: "w19", date: "24 JUL", weekday: "Fredag", time: "17:00 — 20:00", title: "Vennedating: Sip & Sew", host: "Sosial sykveld", price: "750,–", tag: "Event", link: "https://relove.hoopla.no/event/1691491900", img: "images/jul-sipsew2.jpg" },
-{ id: "w20", date: "25 JUL", weekday: "Lørdag", time: "17:00 — 19:00", title: "Nålefilting", host: "Matilda Høøg", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/403982470", img: "images/jul-nalefilting.jpg" },
-{ id: "w21", date: "28 JUL", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Lær deg håndsøm", host: "Katya Bukhantsova", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1627662032", img: "images/jul-handsom.jpg" },
-{ id: "w22", date: "29 JUL", weekday: "Onsdag", time: "17:00 — 19:00", title: "Trykk på tetrapack", host: "Tone Eikholt", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1238525817", img: "images/jul-trykk.jpg" },
-{ id: "w23", date: "30 JUL", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/jul-makernight.jpg" },
-{ id: "w24", date: "31 JUL", weekday: "Fredag", time: "17:00 — 20:00", title: "Vennedating: Sip & Sew", host: "Sosial sykveld", price: "750,–", tag: "Event", link: "https://relove.hoopla.no/event/1691491900", img: "images/jul-sipsew.jpg" }];
+{ id: "w1", date: "03 AUG", weekday: "Mandag", time: "16:00 — 20:00", title: "Reparasjonstreff", host: "Eline Medbøe", price: "Gratis", note: "Drop-in", tag: "Gratis", img: "images/jul-reparasjon.jpg" },
+{ id: "w2", date: "04 AUG", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Broderiteknikker", host: "Katya Bukhantsova", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1606229101", img: "images/jul-broderi.jpg" },
+{ id: "w3", date: "05 AUG", weekday: "Onsdag", time: "17:00 — 19:00", title: "Sy glidelås", host: "Katya Bukhantsova", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1321301142", img: "images/jul-glidelas.jpg" },
+{ id: "w4", date: "06 AUG", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/jul-makernight.jpg" },
+{ id: "w5", date: "08 AUG", weekday: "Lørdag", time: "17:00 — 20:00", title: "Vennedating: Sip & Sew", host: "Sosial sykveld", price: "750,–", tag: "Event", link: "https://relove.hoopla.no/event/2133667627", img: "images/jul-sipsew.jpg" },
+{ id: "w6", date: "11 AUG", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Trykk på tetrapack", host: "Tone Eikholt", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1772316964", img: "images/jul-trykk.jpg" },
+{ id: "w7", date: "12 AUG", weekday: "Onsdag", time: "17:00 — 19:00", title: "Bli kjent med symaskinen", host: "Katja Nielsen", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/531516708", img: "images/ws-symaskin.jpg" },
+{ id: "w8", date: "13 AUG", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/jul-makernight.jpg" },
+{ id: "w9", date: "14 AUG", weekday: "Fredag", time: "17:00 — 20:00", title: "Vennedating: Sip & Sew", host: "Sosial sykveld", price: "750,–", tag: "Event", link: "https://relove.hoopla.no/event/696669961", img: "images/jul-sipsew2.jpg" },
+{ id: "w10", date: "18 AUG", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Tekstilillustrasjon og håndsøm", host: "Anna Lubchencko", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1549543988", img: "images/jul-tekstil.jpg" },
+{ id: "w11", date: "19 AUG", weekday: "Onsdag", time: "17:00 — 20:00", title: "Franske sømmer & tote-bag", host: "Katja Nielsen", price: "940,–", tag: "Kurs", link: "https://relove.hoopla.no/event/1595635692", img: "images/jul-totebag.jpg" },
+{ id: "w12", date: "20 AUG", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/jul-makernight.jpg" },
+{ id: "w13", date: "22 AUG", weekday: "Lørdag", time: "17:00 — 20:00", title: "Vennedating: Sip & Sew", host: "Sosial sykveld", price: "750,–", tag: "Event", link: "https://relove.hoopla.no/event/1318012257", img: "images/jul-sipsew.jpg" },
+{ id: "w14", date: "25 AUG", weekday: "Tirsdag", time: "17:00 — 19:00", title: "Lær deg håndsøm", host: "Katya Bukhantsova", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/2133209000", img: "images/jul-handsom.jpg" },
+{ id: "w15", date: "26 AUG", weekday: "Onsdag", time: "17:00 — 19:00", title: "Jeans-reparasjon", host: "Katya Bukhantsova", price: "750,–", tag: "Kurs", link: "https://relove.hoopla.no/event/261192005", img: "images/ws-jeans.jpg" },
+{ id: "w16", date: "27 AUG", weekday: "Torsdag", time: "16:00 — 20:00", title: "Maker Night", host: "Drop-in i verkstedet", price: "350,–", note: "Gratis for medlemmer i Maker Club", tag: "Drop-in", img: "images/jul-makernight.jpg" },
+{ id: "w17", date: "28 AUG", weekday: "Fredag", time: "17:00 — 20:00", title: "Vennedating: Sip & Sew", host: "Sosial sykveld", price: "750,–", tag: "Event", link: "https://relove.hoopla.no/event/969691476", img: "images/jul-sipsew2.jpg" }];
 
 
 const SERVICES = [
@@ -281,7 +274,7 @@ function Schedule() {
       <header className="section-head">
         <div>
           <div className="eyebrow"><Dot /> Kurs &amp; events</div>
-          <h2>Hva skjer i juli</h2>
+          <h2>Hva skjer i august</h2>
         </div>
         <div className="filter-pills">
           {tags.map((t) =>
