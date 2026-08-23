@@ -157,7 +157,7 @@ function Hero({ tweaks }) {
           </div>
           <p className="hero-sub">
             Bærekraftig omstilling i praksis på{" "}
-            <span className="addr">Sagene i Oslo</span>.
+            <span className="addr">i Oslo</span>.
             2.hand, broderitjenester, kurs og samlinger.
           </p>
           <div className="hero-ctas">
@@ -264,74 +264,44 @@ function StatsBar() {
    SCHEDULE — interactive workshop list
    ============================================================ */
 function Schedule() {
-  const [filter, setFilter] = useState("Alle");
-  const [hover, setHover] = useState(null);
-  const tags = ["Alle", "Kurs", "Drop-in", "Gratis", "Event"];
-  const list = filter === "Alle" ? WORKSHOPS : WORKSHOPS.filter((w) => w.tag === filter);
+  const [calMode, setCalMode] = useState("MONTH");
+  const CAL_ID = "c_91ec80b3f24ff369954f58db6d82e431102ace623cdaddabcf70ba988a1eb5f7%40group.calendar.google.com";
+  const CAL_SRC =
+  `https://calendar.google.com/calendar/embed?src=${CAL_ID}` +
+  `&ctz=Europe%2FOslo&mode=${calMode}` +
+  `&bgcolor=%23f5f3ee&color=%230da959` +
+  `&showTitle=0&showPrint=0&showTz=0&showCalendars=0&showTabs=0&showNav=1&showDate=1&wkst=2`;
 
   return (
     <section className="schedule" id="schedule">
       <header className="section-head">
         <div>
           <div className="eyebrow"><Dot /> Kurs &amp; events</div>
-          <h2>Hva skjer i august</h2>
+          <h2>Hva skjer</h2>
         </div>
-        <div className="filter-pills">
-          {tags.map((t) =>
-          <button key={t} className={"pill " + (filter === t ? "is-on" : "")} onClick={() => setFilter(t)}>
-              {t}
-            </button>
+        <div className="cal-modes">
+          {[["MONTH", "Måned"], ["WEEK", "Uke"], ["AGENDA", "Liste"]].map(([m, l]) =>
+          <button key={m} className={"cal-mode " + (calMode === m ? "is-on" : "")} onClick={() => setCalMode(m)}>{l}</button>
           )}
         </div>
       </header>
 
-      <ul className="ws-list">
-        {list.map((w) => {
-          const isHover = hover === w.id;
-          return (
-            <li
-              key={w.id}
-              className={"ws-row " + (isHover ? "is-hover" : "")}
-              onMouseEnter={() => setHover(w.id)}
-              onMouseLeave={() => setHover(null)}>
+      <div className="cal-wrap">
+        <div className="cal-frame">
+          <div className="cal-bar">
+            <span className="cal-bar-dots"><i /><i /><i /></span>
+            <span className="cal-bar-label">Circular Maker Studio — program</span>
+            <a className="cal-bar-link" href={`https://calendar.google.com/calendar/u/0?cid=${CAL_ID}`} target="_blank" rel="noopener noreferrer">Legg til i din kalender ↗</a>
+          </div>
+          <iframe
+            className="cal-embed"
+            src={CAL_SRC}
+            title="Circular Maker Studio — kalender"
+            frameBorder="0"
+            scrolling="no" />
 
-              <div className="ws-date">
-                <div className="ws-date-day">{w.date.split(" ")[0]}</div>
-                <div className="ws-date-mo">{w.date.split(" ")[1]}</div>
-                {w.weekday && <div className="ws-date-wd">{w.weekday}</div>}
-              </div>
-              <div className="ws-time">{w.time}</div>
-              <div className="ws-title">
-                <div className="ws-tag-line"><Tag>{w.tag}</Tag></div>
-                <div className="ws-h">{w.title}</div>
-                <div className="ws-host">m/ {w.host}</div>
-              </div>
-              <div className="ws-spots">
-                <div className="ws-price">{w.price}</div>
-                {w.note && <div className="ws-price-note">{w.note}</div>}
-              </div>
-              {w.link ?
-                <a
-                  className="ws-cta"
-                  href={w.link}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Påmelding ↗
-                </a> :
-                <span className="ws-cta is-dropin">
-                  {w.tag === "Event" ? "Åpent — møt opp" : "Bare møt opp"}
-                </span>
-              }
-              <div className="ws-hover-img" aria-hidden>
-                {w.img ?
-                  <img src={w.img} alt="" /> :
-                  <div className="ws-hover-empty" style={{ background: w.tag === "Event" ? "var(--coral)" : "var(--paper-2)" }} />
-                }
-              </div>
-            </li>);
-
-        })}
-      </ul>
+        </div>
+      </div>
     </section>);
 
 }
@@ -473,7 +443,7 @@ function Klubben() {
           <div className="eyebrow"><Dot color="var(--coral)" /> Maker Club</div>
           <h2>Skap, reparer<br/>og jobb med egne<br/><em>prosjekter.</em></h2>
           <p className="kl-lede">
-            Et åpent verksted og et kreativt fellesskap. Lån utstyr, få veiledning,
+            Et åpent verksted og et kreativt fellesskap på Sagene. Lån utstyr, få veiledning,
             og bli en del av miljøet — drop-in eller som medlem.
           </p>
         </div>
@@ -613,6 +583,39 @@ function Visit() {
             <iframe
               title="Kart over Maridalsveien 154, Oslo"
               src="https://www.google.com/maps?q=Maridalsveien+154,+Oslo&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <span className="map-badge">
+              <span className="map-pin" />
+              Åpne i Google Maps ↗
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div className="visit-grid visit-grid-alt">
+        <div className="visit-left">
+          <div className="eyebrow"><Dot color="var(--coral)" /> Kurssted</div>
+          <h2>Ekebergveien 243</h2>
+          <p>1166 Oslo</p>
+          <p className="visit-note">Her holder vi kun kurs og workshops — ingen butikk, tjenester eller drop-in. Sjekk programmet for hvilke kurs som går her.</p>
+          <div className="contact">
+            <a href="mailto:kontakt@relove.info">kontakt@relove.info</a>
+            <a href="tel:+4798442960">+47 984 42 960</a>
+          </div>
+        </div>
+        <div className="visit-right">
+          <a
+            className="map-mock"
+            href="https://www.google.com/maps/search/?api=1&query=Ekebergveien+243+1166+Oslo"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Åpne Ekebergveien 243 i Google Maps">
+            <iframe
+              title="Kart over Ekebergveien 243, Oslo"
+              src="https://www.google.com/maps?q=Ekebergveien+243,+1166+Oslo&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen

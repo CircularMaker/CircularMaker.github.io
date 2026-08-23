@@ -309,7 +309,21 @@ h2 {
   padding: 100px 0 80px;
   background: var(--paper);
 }
-.filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.cal-modes { display: flex; gap: 4px; background: var(--paper-2); border-radius: 999px; padding: 4px; }
+.cal-mode { padding: 9px 18px; border-radius: 999px; border: none; background: transparent; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-2); transition: all .2s ease; }
+.cal-mode:hover { color: var(--ink); }
+.cal-mode.is-on { background: var(--ink); color: var(--paper); }
+.cal-wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 48px 20px; }
+.cal-frame { border: 1px solid var(--line); border-radius: 28px; overflow: hidden; background: var(--paper); box-shadow: 0 30px 60px -40px rgba(0,0,0,0.18); }
+.cal-bar { display: flex; align-items: center; gap: 16px; padding: 16px 22px; background: var(--ink); color: var(--paper); }
+.cal-bar-dots { display: flex; gap: 6px; }
+.cal-bar-dots i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.25); }
+.cal-bar-dots i:first-child { background: var(--green); }
+.cal-bar-label { flex: 1; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+.cal-bar-link { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--paper); border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px; transition: color .2s ease, border-color .2s ease; }
+.cal-bar-link:hover { color: var(--green); border-color: var(--green); }
+.cal-embed { width: 100%; height: 680px; border: 0; display: block; background: var(--paper); filter: saturate(0.92); }
+@media (max-width: 640px) { .cal-wrap { padding: 0 24px 20px; } .cal-embed { height: 520px; } .cal-bar-label { display: none; } }
 .pill {
   padding: 9px 16px; border-radius: 999px;
   border: 1px solid var(--line); background: transparent;
@@ -874,6 +888,8 @@ h2 {
   font-family: var(--font-mono); font-size: 14px; color: var(--ink);
 }
 
+.visit-grid-alt { margin-top: 80px; padding-top: 80px; border-top: 1px solid var(--line); }
+.visit-note { margin-top: 20px; max-width: 420px; color: var(--muted); font-size: 15.5px; }
 .map-mock {
   position: relative; display: block;
   border-radius: 28px; overflow: hidden;
