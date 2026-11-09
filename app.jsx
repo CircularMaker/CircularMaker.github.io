@@ -191,6 +191,7 @@ function NavStrip() {
       </div>
       <nav className="nav-links">
         <a href="#schedule">Kurs &amp; events</a>
+        <a href="Kurs.html">Kursoversikt</a>
         <a href="#services">Tjenester</a>
         <a href="#klubben">Maker Club</a>
         <a href="#partners">Partnere</a>
@@ -598,8 +599,8 @@ function Visit() {
       <div className="visit-grid visit-grid-alt">
         <div className="visit-left">
           <div className="eyebrow"><Dot color="var(--coral)" /> Kurssted</div>
-          <h2>Ekebergveien 243</h2>
-          <p>1166 Oslo</p>
+          <h2>Nordstrand Kulturarena</h2>
+          <p>Ekebergveien 243, 1166 Oslo</p>
           <p className="visit-note">Her holder vi kun kurs og workshops — ingen butikk, tjenester eller drop-in. Sjekk programmet for hvilke kurs som går her.</p>
           <div className="contact">
             <a href="mailto:kontakt@relove.info">kontakt@relove.info</a>
@@ -644,6 +645,7 @@ function Footer() {
             <h4>Studio</h4>
             <a href="#services">Tjenester</a>
             <a href="#schedule">Kurs &amp; events</a>
+            <a href="Kurs.html">Kursoversikt</a>
             <a href="#visit">Besøk</a>
           </div>
           <div>
